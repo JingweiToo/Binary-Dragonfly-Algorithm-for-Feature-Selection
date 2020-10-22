@@ -1,12 +1,3 @@
-%-------------------------------------------------------------------------%
-%  Binary Dragonfly Algorithm (BDA) source codes demo version             %
-%                                                                         %
-%  Programmer: Jingwei Too                                                %
-%                                                                         %
-%  E-Mail: jamesjames868@gmail.com                                        %
-%-------------------------------------------------------------------------%
-
-
 function [sFeat,Sf,Nf,curve]=jBDA(feat,label,opts)
 if isfield(opts,'N'), N=opts.N; end
 if isfield(opts,'T'), T=opts.T; end

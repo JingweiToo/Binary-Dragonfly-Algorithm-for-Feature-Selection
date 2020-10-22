@@ -21,10 +21,10 @@ Acc=zeros(1,kfold);
 for i=1:kfold
 	trainIdx=Model.training(i); testIdx=Model.test(i);
   xtrain=sFeat(trainIdx==1,:); ytrain=label(trainIdx==1);
-  xtest=sFeat(testIdx==1,:); ytest=label(testIdx==1);
+  xvalid=sFeat(testIdx==1,:); yvalid=label(testIdx==1);
   KNN=fitcknn(xtrain,ytrain,'NumNeighbors',k);
-  pred=predict(KNN,xtest); clear KNN
-  Acc(i)=jAccuracy(pred,ytest);
+  pred=predict(KNN,xvalid); clear KNN
+  Acc(i)=jAccuracy(pred,yvalid);
 end
 Err=1-mean(Acc/100); 
 end

@@ -28,14 +28,14 @@ clc; clear; close
 kfold=10; k=5; N=10; T=100;
 O.k=k; O.kfold=kfold; O.N=N; O.T=T; 
 % Load data
-load ionesphere.mat; 
+load ionosphere.mat; 
 % Divide data into train & validate using cross-validation
 CV=cvpartition(label,'KFold',kfold,'Stratify',true);
 O.Model=CV; 
 % Perform feature selection 
 [sFeat,Sf,Nf,curve]=jBDA(feat,label,O);
 % Accuracy 
-Acc=jknn(sFeat,label,CV,O); 
+Acc=jKNN(sFeat,label,CV,O); 
 % Plot convergence curve
 figure(); plot(1:T,curve); xlabel('Number of Iterations');
 ylabel('Fitness Value'); title('BDA'); grid on;
