@@ -1,2 +1,8 @@
 # Binary-Dragonfly-Algorithm-for-Feature-Selection
-Application of Binary Dragonfly Algorithm (BDA) in the feature selection tasks.
+
+
+This toolbox offers Binary Dragonfly Algorithm (BDA) method
+
+The "Main" script illustrates the example of how BDA can solve the feature selection problem using benchmark data-set.
+
+**********************************************************************************************************************************
