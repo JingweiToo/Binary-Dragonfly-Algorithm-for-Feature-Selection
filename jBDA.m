@@ -1,6 +1,4 @@
-function [sFeat,Sf,Nf,curve]=jBDA(feat,label,opts)
-if isfield(opts,'N'), N=opts.N; end
-if isfield(opts,'T'), T=opts.T; end
+function [sFeat,Sf,Nf,curve]=jBDA(feat,label,N,T,HO)
 
 fun=@jFitnessFunction; 
 D=size(feat,2); 
@@ -10,7 +8,7 @@ fit=zeros(1,N); Xnew=zeros(N,D); Dmax=6;
 %---// Iteration Start
 while t <= T
   for i=1:N
-    fit(i)=fun(feat,label,X(i,:),opts); 
+    fit(i)=fun(feat,label,X(i,:),HO); 
     if fit(i) < fitF
       fitF=fit(i); Xf=X(i,:);
     end

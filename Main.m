@@ -12,8 +12,6 @@
 % label:  labelling
 % N:      Number of dragonflies
 % T:      Maximum number of iterations
-% kfold:  Number of K-fold cross-validation
-% k:      Number of k in KNN
 %---Outputs----------------------------------------------------------------
 % sFeat:  Selected features
 % Sf:     Selected feature index
@@ -24,18 +22,18 @@
 
 %% Binary Dragonfly Algorithm
 clc; clear; close
-% Set parameters
-kfold=10; k=5; N=10; T=100;
-O.k=k; O.kfold=kfold; O.N=N; O.T=T; 
-% Load data
-load ionosphere.mat; 
-% Divide data into train & validate using cross-validation
-CV=cvpartition(label,'KFold',kfold,'Stratify',true);
-O.Model=CV; 
+% Benchmark data set 
+load ionosphere.mat;
+% Set 20% data as validation set
+ho=0.2; 
+% Hold-out method
+HO=cvpartition(label,'HoldOut',ho,'Stratify',false);
+% Parameter setting
+N=10; T=100; 
 % Perform feature selection 
-[sFeat,Sf,Nf,curve]=jBDA(feat,label,O);
+[sFeat,Sf,Nf,curve]=jBDA(feat,label,N,T,HO);
 % Accuracy 
-Acc=jKNN(sFeat,label,CV,O); 
+Acc=jKNN(sFeat,label,HO); 
 % Plot convergence curve
 figure(); plot(1:T,curve); xlabel('Number of Iterations');
 ylabel('Fitness Value'); title('BDA'); grid on;
