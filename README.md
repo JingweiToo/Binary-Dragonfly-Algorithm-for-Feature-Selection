@@ -19,6 +19,7 @@
 * *Sf*       : selected feature index
 * *Nf*       : number of selected features
 * *curve*    : convergence curve
+* *Acc*      : accuracy of validation model
 
 
 ### Example
