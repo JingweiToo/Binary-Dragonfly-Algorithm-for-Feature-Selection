@@ -1,13 +1,16 @@
-function Acc=jKNN(sFeat,label,HO)
+function Acc = jKNN(sFeat,label,HO)
 %---// Parameter setting for k-value of KNN //
-k=5; 
-trainIdx=HO.training; testIdx=HO.test;
-xtrain=sFeat(trainIdx==1,:); ytrain=label(trainIdx==1);
-xvalid=sFeat(testIdx==1,:); yvalid=label(testIdx==1);
-KNN=fitcknn(xtrain,ytrain,'NumNeighbors',k);
-pred=predict(KNN,xvalid);
-Acc=jAccuracy(pred,yvalid); 
-fprintf('\n Accuracy: %g %%',Acc);
+k = 5; 
+
+trainIdx = HO.training;        testIdx  = HO.test;
+xtrain   = sFeat(trainIdx,:);  ytrain   = label(trainIdx);
+xvalid   = sFeat(testIdx,:);   yvalid   = label(testIdx);
+
+KNN  = fitcknn(xtrain,ytrain,'NumNeighbors',k);
+pred = predict(KNN,xvalid);
+Acc  = jAccuracy(pred,yvalid); 
+
+fprintf('\n Accuracy: %g %%',100 * Acc);
 end
 
 

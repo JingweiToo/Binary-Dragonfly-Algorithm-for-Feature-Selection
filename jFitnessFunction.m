@@ -1,28 +1,31 @@
 % Notation: This fitness function is for demonstration 
 
-function cost=jFitnessFunction(feat,label,X,HO)
-alpha=0.99; beta=0.01;
-maxFeat=length(X); 
-if sum(X==1)==0
-  cost=inf;
+function cost = jFitnessFunction(feat,label,X,HO)
+alpha   = 0.99; 
+beta    = 0.01;
+maxFeat = length(X); 
+if sum(X == 1) == 0
+  cost = inf;
 else
-  Error=jwrapperknn(feat(:,X==1),label,HO);
-  Nsf=sum(X==1);
-  cost=alpha*Error+beta*(Nsf/maxFeat); 
+  error    = jwrapperknn(feat(:, X == 1),label,HO);
+  num_feat = sum(X == 1);
+  cost     = alpha * error + beta * (num_feat / maxFeat); 
 end
 end
 
 
-function Err=jwrapperknn(sFeat,label,HO)
+function error = jwrapperknn(sFeat,label,HO)
 %---// Parameter setting for k-value of KNN //
-k=5; 
-trainIdx=HO.training; testIdx=HO.test;
-xtrain=sFeat(trainIdx==1,:); ytrain=label(trainIdx==1);
-xvalid=sFeat(testIdx==1,:); yvalid=label(testIdx==1);
-KNN=fitcknn(xtrain,ytrain,'NumNeighbors',k);
-pred=predict(KNN,xvalid); 
-Acc=jAccuracy(pred,yvalid);
-Err=1-(Acc/100); 
+k = 5;
+
+trainIdx = HO.training;        testIdx  = HO.test;
+xtrain   = sFeat(trainIdx,:);  ytrain   = label(trainIdx);
+xvalid   = sFeat(testIdx,:);   yvalid   = label(testIdx);
+
+KNN   = fitcknn(xtrain,ytrain,'NumNeighbors',k);
+pred  = predict(KNN,xvalid); 
+Acc   = jAccuracy(pred,yvalid);
+error = 1 - Acc; 
 end
 
 
